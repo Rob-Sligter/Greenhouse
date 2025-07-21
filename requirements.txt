@@ -2,7 +2,7 @@
 Flask==2.2.2
 influxdb==5.3.1
 astral==3.2
-pytz==2022.7.1
+pytz==2023.3
 numpy==1.24.3
 
 # Raspberry Pi GPIO and sensor libraries
@@ -10,12 +10,12 @@ RPi.GPIO==0.7.1
 dht11==0.1.0
 
 # Adafruit libraries for sensors
-Adafruit-Blinka==8.39.1
-adafruit-circuitpython-ads1x15==2.2.25
-adafruit-circuitpython-busdevice==5.2.9
-Adafruit-GPIO==1.0.4
-Adafruit-PlatformDetect==3.63.0
-Adafruit-PureIO==1.1.11
+Adafruit-Blinka==8.20.0
+adafruit-circuitpython-ads1x15==2.2.21
+adafruit-circuitpython-busdevice==5.2.6
+Adafruit-GPIO==1.0.3
+Adafruit-PlatformDetect==3.47.0
+Adafruit-PureIO==1.1.10
 
 # HTTP and web dependencies
 requests==2.31.0
