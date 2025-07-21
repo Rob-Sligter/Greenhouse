@@ -1,11 +1,8 @@
 # Requirements for sensor_in.py (webhook API service)
 # This service handles HTTP webhooks and controls relays
 
-# Flask web framework (simplified)
-Flask==2.2.2
+# Flask web framework (older stable version with pre-compiled wheels)
+Flask==2.0.3
 
 # Raspberry Pi GPIO for relay control
 RPi.GPIO==0.7.1
-
-# HTTP dependencies for push notifications
-requests==2.31.0

@@ -1,11 +1,8 @@
 # Requirements for web_watering.py (manual watering web interface)
 # This service provides a web UI for manual plant watering
 
-# Flask web framework (simplified)
-Flask==2.2.2
+# Flask web framework (older stable version with pre-compiled wheels)
+Flask==2.0.3
 
 # Raspberry Pi GPIO for relay control
 RPi.GPIO==0.7.1
-
-# HTTP dependencies for push notifications
-requests==2.31.0
