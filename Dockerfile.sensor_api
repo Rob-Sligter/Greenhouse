@@ -1,0 +1,25 @@
+# Base Python image for Raspberry Pi
+FROM python:3.9-slim
+
+# Install system dependencies for GPIO
+RUN apt-get update && apt-get install -y \
+    gcc \
+    python3-dev \
+    libgpiod2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the sensor API script
+COPY sensor_in.py .
+
+# Expose port 5000
+EXPOSE 5000
+
+# Run the Flask API
+CMD ["python", "sensor_in.py"]

@@ -1,0 +1,22 @@
+# Base Python image for Raspberry Pi
+FROM python:3.9-slim
+
+# Install system dependencies for GPIO and sensor libraries
+RUN apt-get update && apt-get install -y \
+    gcc \
+    python3-dev \
+    libgpiod2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the sensor collector script
+COPY sensor_out.py .
+
+# Run the sensor collector
+CMD ["python", "sensor_out.py"]

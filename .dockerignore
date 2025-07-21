@@ -1,0 +1,52 @@
+# Git and version control
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Python cache and virtual environments
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+.env/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup and temporary files
+*.bak
+*.tmp
+*~
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+
+# 3D models and old files
+3d_models/
+old_files/
+
+# Docker files (not needed in container)
+Dockerfile*
+docker-compose*.yml
+.dockerignore

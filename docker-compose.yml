@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  influxdb:
+    image: influxdb:1.8
+    container_name: greenhouse_influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=sensor_data
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=adminpassword
+      - INFLUXDB_USER=greenhouse
+      - INFLUXDB_USER_PASSWORD=greenhouse123
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+      - ./influxdb.conf:/etc/influxdb/influxdb.conf:ro
+    restart: unless-stopped
+    networks:
+      - greenhouse_network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: greenhouse_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - influxdb
+    restart: unless-stopped
+    networks:
+      - greenhouse_network
+
+  sensor_collector:
+    build: 
+      context: .
+      dockerfile: Dockerfile.sensor_collector
+    container_name: greenhouse_sensor_collector
+    privileged: true
+    volumes:
+      - /dev:/dev
+      - /sys:/sys
+    environment:
+      - INFLUXDB_HOST=influxdb
+      - INFLUXDB_PORT=8086
+      - INFLUXDB_DATABASE=sensor_data
+    depends_on:
+      - influxdb
+    restart: unless-stopped
+    networks:
+      - greenhouse_network
+
+  sensor_api:
+    build:
+      context: .
+      dockerfile: Dockerfile.sensor_api
+    container_name: greenhouse_sensor_api
+    privileged: true
+    ports:
+      - "5000:5000"
+    volumes:
+      - /dev:/dev
+      - /sys:/sys
+    restart: unless-stopped
+    networks:
+      - greenhouse_network
+
+  web_watering:
+    build:
+      context: .
+      dockerfile: Dockerfile.web_watering
+    container_name: greenhouse_web_watering
+    privileged: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - /dev:/dev
+      - /sys:/sys
+    restart: unless-stopped
+    networks:
+      - greenhouse_network
+
+volumes:
+  influxdb_data:
+  grafana_data:
+
+networks:
+  greenhouse_network:
+    driver: bridge

@@ -1,0 +1,26 @@
+# Base Python image for Raspberry Pi
+FROM python:3.9-slim
+
+# Install system dependencies for GPIO
+RUN apt-get update && apt-get install -y \
+    gcc \
+    python3-dev \
+    libgpiod2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the web server files
+COPY web_watering.py .
+COPY templates/ ./templates/
+
+# Expose port 8080
+EXPOSE 8080
+
+# Run the web server
+CMD ["python", "web_watering.py"]
