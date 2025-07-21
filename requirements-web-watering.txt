@@ -1,3 +1,5 @@
 # Minimal dependencies for web_watering.py based on actual imports  
 Flask==2.0.3
+# Pin Werkzeug to compatible version with Flask 2.0.3
+Werkzeug==2.0.3
 RPi.GPIO==0.7.1

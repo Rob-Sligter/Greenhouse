@@ -3,6 +3,8 @@
 
 # Flask web framework (older stable version with pre-compiled wheels)
 Flask==2.0.3
+# Pin Werkzeug to compatible version with Flask 2.0.3
+Werkzeug==2.0.3
 
 # Raspberry Pi GPIO for relay control
 RPi.GPIO==0.7.1
