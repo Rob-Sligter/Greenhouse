@@ -441,3 +441,7 @@ docker compose up --build
 - At least 2GB RAM recommended
 - 16GB+ SD card
 - Stable power supply
+
+
+## Author Information
+This project was created by Rob Sligter. For more information, visit my [GitHub profile](https://github.com/robsligter)
