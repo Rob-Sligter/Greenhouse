@@ -3,7 +3,6 @@ import os
 from datetime import datetime
 
 # Third-party imports
-import numpy as np
 import pytz
 from influxdb import InfluxDBClient
 from astral import LocationInfo
@@ -127,14 +126,39 @@ def read_light_sensor(light_pin):
     except:
         return 0
 
-# Function to detect and remove outliers using IQR
+# Function to detect and remove outliers using IQR (pure Python implementation)
 def remove_outliers(data):
     if len(data) < 4:  # Not enough data to calculate IQR
         return data
-    q1, q3 = np.percentile(data, [25, 75])
+    
+    # Sort the data
+    sorted_data = sorted(data)
+    n = len(sorted_data)
+    
+    # Calculate Q1 (25th percentile) and Q3 (75th percentile)
+    q1_index = n * 0.25
+    q3_index = n * 0.75
+    
+    # Interpolate if needed
+    if q1_index.is_integer():
+        q1 = sorted_data[int(q1_index)]
+    else:
+        lower = int(q1_index)
+        upper = lower + 1
+        q1 = sorted_data[lower] + (sorted_data[upper] - sorted_data[lower]) * (q1_index - lower)
+    
+    if q3_index.is_integer():
+        q3 = sorted_data[int(q3_index)]
+    else:
+        lower = int(q3_index)
+        upper = lower + 1
+        q3 = sorted_data[lower] + (sorted_data[upper] - sorted_data[lower]) * (q3_index - lower)
+    
+    # Calculate IQR and bounds
     iqr = q3 - q1
     lower_bound = q1 - 1.5 * iqr
     upper_bound = q3 + 1.5 * iqr
+    
     return [x for x in data if lower_bound <= x <= upper_bound]
 
 def read_all_channels():

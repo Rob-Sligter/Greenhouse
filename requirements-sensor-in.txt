@@ -1,0 +1,4 @@
+# Minimal dependencies for sensor_in.py based on actual imports
+Flask==2.0.3
+Werkzeug==2.0.3
+RPi.GPIO==0.7.1

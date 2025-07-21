@@ -1,0 +1,10 @@
+# Minimal dependencies for sensor_out.py based on actual imports
+Flask==2.0.3
+Werkzeug==2.0.3
+influxdb==5.3.1
+pytz==2021.3
+astral==2.2
+RPi.GPIO==0.7.1
+dht11==0.1.0
+adafruit-circuitpython-ads1x15==2.2.21
+adafruit-blinka==8.22.2

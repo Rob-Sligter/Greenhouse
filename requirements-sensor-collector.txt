@@ -1,9 +1,8 @@
 # Requirements for sensor_out.py (sensor collector service)
 # This service reads sensors and sends data to InfluxDB
 
-# Core dependencies (stable versions with pre-compiled wheels)
+# Core dependencies (no numpy - using pure Python)
 influxdb==5.3.1
-numpy==1.18.5
 pytz==2021.3
 astral==2.2
 python-dateutil==2.8.2
