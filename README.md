@@ -444,4 +444,4 @@ docker compose up --build
 
 
 ## Author Information
-This project was created by Rob Sligter. For more information, visit my [GitHub profile](https://github.com/robsligter)
+This project was created by Rob Sligter. For more information, visit my [GitHub profile](https://github.com/Rob-Sligter)
