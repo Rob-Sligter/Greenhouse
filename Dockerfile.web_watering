@@ -1,9 +1,8 @@
 # Base Python image for Raspberry Pi
 FROM python:3.9-slim
 
-# Install system dependencies for GPIO
+# Install system dependencies for GPIO (lightweight)
 RUN apt-get update && apt-get install -y \
-    gcc \
     python3-dev \
     libgpiod2 \
     && rm -rf /var/lib/apt/lists/*
@@ -12,11 +11,9 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copy requirements and install Python dependencies
-COPY requirements.txt .
-COPY requirements-flexible.txt .
+COPY requirements-web-watering.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
-    (pip install --no-cache-dir -r requirements.txt || \
-     pip install --no-cache-dir -r requirements-flexible.txt)
+    pip install --no-cache-dir -r requirements-web-watering.txt
 
 # Copy the web server files
 COPY web_watering.py .

@@ -1,0 +1,34 @@
+# Minimal requirements - installs only pre-compiled wheels when possible
+# Use this for fastest, most reliable installation
+
+# Core dependencies (Flask ecosystem)
+Flask==2.2.2
+Werkzeug==2.2.3
+Jinja2==3.1.2
+MarkupSafe==2.1.2
+itsdangerous==2.1.2
+click==8.1.3
+
+# Time and location
+pytz==2023.3
+astral==3.2
+python-dateutil==2.8.2
+
+# Database
+influxdb==5.3.1
+requests==2.31.0
+urllib3==1.26.16
+
+# Basic scientific computing (older stable version with pre-compiled wheels)
+numpy==1.21.6
+
+# Raspberry Pi GPIO (minimal)
+RPi.GPIO==0.7.1
+
+# DHT sensor (pure Python)
+dht11==0.1.0
+
+# Adafruit - only essential packages
+Adafruit-Blinka==7.3.3
+adafruit-circuitpython-ads1x15==2.2.15
+Adafruit-GPIO==1.0.3

@@ -1,0 +1,25 @@
+# Requirements for sensor_out.py (sensor collector service)
+# This service reads sensors and sends data to InfluxDB
+
+# Core dependencies
+influxdb==5.3.1
+numpy==1.21.6
+pytz==2023.3
+astral==3.2
+python-dateutil==2.8.2
+
+# Raspberry Pi GPIO and sensor libraries
+RPi.GPIO==0.7.1
+dht11==0.1.0
+
+# Adafruit libraries for ADS1115 and I2C sensors
+Adafruit-Blinka==7.3.3
+adafruit-circuitpython-ads1x15==2.2.15
+adafruit-circuitpython-busdevice==5.2.6
+Adafruit-GPIO==1.0.3
+Adafruit-PlatformDetect==3.47.0
+Adafruit-PureIO==1.1.10
+
+# HTTP dependencies (for InfluxDB client)
+requests==2.31.0
+urllib3==1.26.16
