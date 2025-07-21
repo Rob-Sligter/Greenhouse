@@ -62,7 +62,16 @@ temp_humi_sensor_outside = dht11.DHT11(pin=TEMP_HUMI_PIN_OUTSIDE)
 influxdb_host = os.getenv('INFLUXDB_HOST', 'localhost')
 influxdb_port = int(os.getenv('INFLUXDB_PORT', '8086'))
 influxdb_database = os.getenv('INFLUXDB_DATABASE', 'sensor_data')
-client = InfluxDBClient(host=influxdb_host, port=influxdb_port, database=influxdb_database)
+influxdb_username = os.getenv('INFLUXDB_USERNAME', 'greenhouse')
+influxdb_password = os.getenv('INFLUXDB_PASSWORD', 'greenhouse123')
+
+client = InfluxDBClient(
+    host=influxdb_host, 
+    port=influxdb_port, 
+    username=influxdb_username,
+    password=influxdb_password,
+    database=influxdb_database
+)
 
 def is_sun_up(city_name, country_name, timezone, latitude, longitude):
     try:
@@ -239,25 +248,36 @@ def read_sensor_data():
     }
 
 def send_data_to_influx(data):
-    json_body = [
-        {
-            "measurement": "greenhouse_data",
-            "tags": {
-                "host": "raspberrypi"
-            },
-            "fields": data
-        }
-    ]
-    client.write_points(json_body)
+    try:
+        json_body = [
+            {
+                "measurement": "greenhouse_data",
+                "tags": {
+                    "host": "raspberrypi"
+                },
+                "fields": data
+            }
+        ]
+        client.write_points(json_body)
+        print(f"Successfully sent data to InfluxDB: {data}")
+    except Exception as e:
+        print(f"Error sending data to InfluxDB: {e}")
 
 
 if __name__ == "__main__":
     print("Starting greenhouse sensor monitoring...")
     
+    # Test InfluxDB connection
+    try:
+        databases = client.get_list_database()
+        print(f"Connected to InfluxDB. Available databases: {databases}")
+    except Exception as e:
+        print(f"Error connecting to InfluxDB: {e}")
+    
     while True:
         try:
             sensor_data = read_sensor_data()
-            print(sensor_data)
+            print(f"Sensor readings: {sensor_data}")
             send_data_to_influx(sensor_data)
             time.sleep(COLLECTION_INTERVAL)
         except KeyboardInterrupt:

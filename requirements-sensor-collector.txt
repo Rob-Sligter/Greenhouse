@@ -9,3 +9,8 @@ astral==2.2
 # Raspberry Pi GPIO and sensor libraries
 RPi.GPIO==0.7.1
 dht11==0.1.0
+
+# Adafruit CircuitPython libraries for I2C and ADS1115
+adafruit-blinka
+adafruit-circuitpython-ads1x15
+adafruit-circuitpython-busdevice
