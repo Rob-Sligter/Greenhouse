@@ -444,4 +444,5 @@ docker compose up --build
 
 
 ## Author Information
-This project was created by Rob Sligter. For more information, visit my [GitHub profile](https://github.com/Rob-Sligter)
+This project was created by Rob Sligter. For more information, visit my [GitHub profile](https://github.com/Rob-Sligter) or contact me via linkedin at [Rob Sligter](https://www.linkedin.com/in/rob-sligter-6919071ba/).
+The 3D models used in this project were created by [Marinus van den Ende](https://github.com/Mario-04) 
