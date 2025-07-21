@@ -1,8 +1,9 @@
 # Base Python image for Raspberry Pi
 FROM python:3.9-slim
 
-# Install system dependencies for GPIO (lightweight)
+# Install system dependencies for GPIO and compilation
 RUN apt-get update && apt-get install -y \
+    gcc \
     python3-dev \
     libgpiod2 \
     && rm -rf /var/lib/apt/lists/*
