@@ -3,13 +3,17 @@ import json
 import RPi.GPIO as GPIO
 import time
 import http.client, urllib
+import os
+
+token = os.getenv('token')
+user = os.getenv('user')
 
 def send_push_message(push_notification):
     conn = http.client.HTTPSConnection("api.pushover.net:443")
     conn.request("POST", "/1/messages.json",
     urllib.parse.urlencode({
-        "token": "aa66iazeqbepcsjmf6x8rmf5cgh9yc",
-        "user": "uqwnoar4qmhr7j99mvczdu7ob2edkd",
+        "token": token,
+        "user": user,
         "message": push_notification,
     }), { "Content-type": "application/x-www-form-urlencoded" })
     conn.getresponse()

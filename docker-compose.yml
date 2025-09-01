@@ -49,6 +49,8 @@ services:
       - INFLUXDB_DATABASE=sensor_data
       - INFLUXDB_USERNAME=greenhouse
       - INFLUXDB_PASSWORD=greenhouse123
+    env_file:
+      - .env
     depends_on:
       - influxdb
     restart: unless-stopped
@@ -61,6 +63,8 @@ services:
       dockerfile: Dockerfile.sensor_api
     container_name: greenhouse_sensor_api
     privileged: true
+    env_file:
+      - .env
     ports:
       - "5000:5000"
     volumes:
@@ -75,6 +79,8 @@ services:
       context: .
       dockerfile: Dockerfile.web_watering
     container_name: greenhouse_web_watering
+    env_file:
+      - .env
     privileged: true
     ports:
       - "8080:8080"

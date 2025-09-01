@@ -1,6 +1,9 @@
 # Base Python image for Raspberry Pi
 FROM python:3.9-slim
 
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
 # Install system dependencies for GPIO and sensor libraries
 RUN apt-get update && apt-get install -y \
     gcc \
